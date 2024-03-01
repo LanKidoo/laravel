@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        />
+        <title>Dropdown Menu with Bootstrap</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            .navbar-nav {
+                justify-content: center;
+                width: 100%;
+                text-transform: uppercase;
+                font-size: 15px !important;
+            }
+            .navbar {
+                background-color: #8b0000;
+                padding: 0;
+            }
+            .nav-link {
+                color: white !important;
+            }
+            header {
+                margin: auto;
+                display: flex !important;
+                align-items: center !important;
+            }
+            #header {
+                margin-top: 55px;
+                height: 117px;
+            }
+            .w-50,
+            .h-100 {
+                color: white;
+                font-size: 5vh;
+                text-decoration: none;
+            }
+            .w50:hover,
+            .h50.hover {
+                text-decoration: none !important;
+            }
+            .navbar-toggler-icon {
+                filter: invert(1);
+            }
+            #header a:visited,
+            #header a:hover,
+            #header a:active,
+            #header a:focus {
+                color: white !important;
+                text-decoration: none !important;
+            }
+            .navbar-light .navbar-nav .nav-link:focus,
+            .navbar-light .navbar-nav .nav-link:hover,
+            .navbar-light .navbar-nav .nav-link.dropdown-toggle:focus,
+            .navbar-light .navbar-nav .nav-link.dropdown-toggle:hover {
+                background-color: white;
+                color: #8b0000 !important; /* Adjust the text color on hover as needed */
+            }
+
+            .navbar-collapse {
+                z-index: 1050;
+            }
+            #header a {
+                font-size: 3.5vw; /* Adjusts size based on the width of the viewport */
+            }
+
+            @media (max-width: 768px) {
+                #header a {
+                    font-size: 3vw; /* Slightly smaller font size for smaller devices */
+                }
+            }
+            .white-text {
+                color: white;
+                background-color: #8b0000 !important;
+                bottom: 0;
+                width: 100%;
+                background-color: #8b0000;
+                color: white;
+                padding: 20px 0;
+            }
+            .white-text a {
+                color: white;
+            }
+            .submit {
+                color: white;
+                background-color: #8b0000;
+            }
+            form {
+                text-align: right;
+                margin-top: 10px;
+            }
+            #app {
+                width: 80%;
+                margin: auto;
+            }
+            .secnav {
+                margin-top: 5px;
+            }
+            .search {
+                color: #8b0000;
+            }
+            .button {
+                background-color: transparent;
+                border: none;
+                color: #8b0000;
+            }
+            .section-hr {
+                background-color: #8b0000;
+                border: 1px solid;
+                color: #8b0000;
+                opacity: 1;
+                margin-top: -10px;
+            }
+            .search-sec {
+                margin-top: 10px;
+            }
+            .carouselphoto {
+                width: 100%;
+                height: 500px;
+            }
+            .carousel-control-prev-icon,
+            .carousel-control-next-icon {
+                filter: invert(1);
+                opacity: 1; /* Zmienia kolor strzałek dla lepszej widoczności */
+            }
+            .carousel-control-next .visually-hidden,
+            .carousel-control-prev .visually-hidden {
+                display: none;
+            }
+
+            .carousel-control-next,
+            .carousel-control-prev {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                z-index: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 15%;
+                padding: 0;
+                color: #fff;
+                text-align: center;
+                background: 0 0;
+                border: 0;
+                opacity: 0.5;
+                transition: opacity 0.15s ease;
+            }
+            .captionStyle .ellipsis h5 {
+                white-space: nowrap; /* Zapobiega łamaniu tekstu na nowe linie */
+                overflow: hidden; /* Ukrywa tekst, który wykracza poza ustaloną szerokość */
+                text-overflow: ellipsis; /* Dodaje ellipsis na końcu tekstu, który się nie mieści */
+                max-width: 90%; /* Ustaw maksymalną szerokość tekstu, dostosuj w razie potrzeby */
+                margin: 0 auto; /* Opcjonalnie, centruje tekst, jeśli to potrzebne */
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+
+            .captionStyle {
+                position: absolute;
+                bottom: 150px; /* Dostosuj odległość od dołu, aby zrobić miejsce na wskaźniki */
+                left: 0;
+                right: 0;
+                z-index: 15; /* Upewnij się, że z-index jest wyższy niż wskaźniki */
+                text-align: center;
+                color: white;
+                font-size: 1.25rem;
+            }
+            .main-nav {
+                position: fixed;
+                z-index: 1000;
+                width: 100%;
+            }
+            .section-rightlist {
+                height: 137px;
+            }
+            .w-100 {
+                width: 100% !important;
+            }
+            .row {
+                display: flex;
+                flex-wrap: wrap;
+            }
+            img {
+                vertical-align: middle;
+                overflow-clip-margin: content-box;
+                overflow: clip;
+            }
+            p {
+                margin-top: 0;
+                margin-bottom: 1rem;
+            }
+            .row a {
+                color: #8b0000;
+            }
+            .row {
+                --bs-gutter-x: 1.5rem;
+                --bs-gutter-y: 0;
+                display: flex;
+                flex-wrap: wrap;
+                margin-top: calc(-1 * var(--bs-gutter-y));
+                margin-right: calc(-0.5 * var(--bs-gutter-x));
+                margin-left: calc(-0.5 * var(--bs-gutter-x));
+            }
+            *,
+            ::after,
+            ::before {
+                box-sizing: border-box;
+            }
+
+            .overflow-hidden {
+                overflow: hidden !important;
+            }
+            .col-xl-7 {
+                flex: 0 0 auto;
+                width: 58.33333333%;
+            }
+            .rightlisttext {
+                height: 130px;
+            }
+            @media (min-width: 1200px) {
+                .rightlisttext {
+                    height: 130px;
+                }
+            }
+            @media (min-width: 768px) {
+                .col-md-7 {
+                    flex: 0 0 auto;
+                    width: 58.3333 3333%;
+                }
+            }
+            .text-dark {
+                --bs-text-opacity: 1;
+                color: rgba(
+                    var(--bs-dark-rgb),
+                    var(--bs-text-opacity)
+                ) !important;
+            }
+            @media (min-width: 1200px) {
+                .col-xl-5 {
+                    -ms-flex: 0 0 41.666667%;
+                    flex: 0 0 41.666667%;
+                    max-width: 41.666667%;
+                }
+            }
+            @media (min-width: 576px) {
+                .col-sm-7 {
+                    flex: 0 0 auto;
+                    width: 58.33333333%;
+                }
+            }
+            p {
+                display: block;
+                margin-block-start: 1em;
+                margin-block-end: 1em;
+                margin-inline-start: 0px;
+                margin-inline-end: 0px;
+            }
+            .rightlisttext > a {
+                font-size: 14px;
+            }
+            @media (max-width: 1700px) {
+                #app {
+                    width: 90%;
+                }
+            }
+            @media (max-width: 1600px) {
+                #app {
+                    width: 95%;
+                }
+            }
+            @media (min-width: 768px) {
+                .col-md-12 {
+                    flex: 0 0 auto;
+                    width: 100%;
+                }
+            }
+            @media (min-width: 576px) {
+                .col-sm-12 {
+                    flex: 0 0 auto;
+                    width: 100%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light main-nav">
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarDropdownMenuLink"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            Fakty
+                        </a>
+                        <div
+                            class="dropdown-menu"
+                            aria-labelledby="navbarDropdownMenuLink"
+                        >
+                            <a class="dropdown-item" href="#">Sub-item 1</a>
+                            <a class="dropdown-item" href="#">Sub-item 2</a>
+                            <a class="dropdown-item" href="#">Sub-item 3</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarDropdownMenuLink"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            Biznes
+                        </a>
+                        <div
+                            class="dropdown-menu"
+                            aria-labelledby="navbarDropdownMenuLink"
+                        >
+                            <a class="dropdown-item" href="#">Sub-item 1</a>
+                            <a class="dropdown-item" href="#">Sub-item 2</a>
+                            <a class="dropdown-item" href="#">Sub-item 3</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarDropdownMenuLink"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            Sport
+                        </a>
+                        <div
+                            class="dropdown-menu"
+                            aria-labelledby="navbarDropdownMenuLink"
+                        >
+                            <a class="dropdown-item" href="#">Sub-item 1</a>
+                            <a class="dropdown-item" href="#">Sub-item 2</a>
+                            <a class="dropdown-item" href="#">Sub-item 3</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarDropdownMenuLink"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            Salon polityczny
+                        </a>
+                        <div
+                            class="dropdown-menu"
+                            aria-labelledby="navbarDropdownMenuLink"
+                        >
+                            <a class="dropdown-item" href="#">Sub-item 1</a>
+                            <a class="dropdown-item" href="#">Sub-item 2</a>
+                            <a class="dropdown-item" href="#">Sub-item 3</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarDropdownMenuLink"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            Kobieta, facet i dziecko
+                        </a>
+                        <div
+                            class="dropdown-menu"
+                            aria-labelledby="navbarDropdownMenuLink"
+                        >
+                            <a class="dropdown-item" href="#">Sub-item 1</a>
+                            <a class="dropdown-item" href="#">Sub-item 2</a>
+                            <a class="dropdown-item" href="#">Sub-item 3</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarDropdownMenuLink"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            Hobby
+                        </a>
+                        <div
+                            class="dropdown-menu"
+                            aria-labelledby="navbarDropdownMenuLink"
+                        >
+                            <a class="dropdown-item" href="#">Sub-item 1</a>
+                            <a class="dropdown-item" href="#">Sub-item 2</a>
+                            <a class="dropdown-item" href="#">Sub-item 3</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarDropdownMenuLink"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            Kultura
+                        </a>
+                        <div
+                            class="dropdown-menu"
+                            aria-labelledby="navbarDropdownMenuLink"
+                        >
+                            <a class="dropdown-item" href="#">Sub-item 1</a>
+                            <a class="dropdown-item" href="#">Sub-item 2</a>
+                            <a class="dropdown-item" href="#">Sub-item 3</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarDropdownMenuLink"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            Motoryzacja
+                        </a>
+                        <div
+                            class="dropdown-menu"
+                            aria-labelledby="navbarDropdownMenuLink"
+                        >
+                            <a class="dropdown-item" href="#">Sub-item 1</a>
+                            <a class="dropdown-item" href="#">Sub-item 2</a>
+                            <a class="dropdown-item" href="#">Sub-item 3</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarDropdownMenuLink"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            Nauka i technologie
+                        </a>
+                        <div
+                            class="dropdown-menu"
+                            aria-labelledby="navbarDropdownMenuLink"
+                        >
+                            <a class="dropdown-item" href="#">Sub-item 1</a>
+                            <a class="dropdown-item" href="#">Sub-item 2</a>
+                            <a class="dropdown-item" href="#">Sub-item 3</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarDropdownMenuLink"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            Historia
+                        </a>
+                        <div
+                            class="dropdown-menu"
+                            aria-labelledby="navbarDropdownMenuLink"
+                        >
+                            <a class="dropdown-item" href="#">Sub-item 1</a>
+                            <a class="dropdown-item" href="#">Sub-item 2</a>
+                            <a class="dropdown-item" href="#">Sub-item 3</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarDropdownMenuLink"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            Siły zbrojne
+                        </a>
+                        <div
+                            class="dropdown-menu"
+                            aria-labelledby="navbarDropdownMenuLink"
+                        >
+                            <a class="dropdown-item" href="#">Sub-item 1</a>
+                            <a class="dropdown-item" href="#">Sub-item 2</a>
+                            <a class="dropdown-item" href="#">Sub-item 3</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarDropdownMenuLink"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            Turystyka
+                        </a>
+                        <div
+                            class="dropdown-menu"
+                            aria-labelledby="navbarDropdownMenuLink"
+                        >
+                            <a class="dropdown-item" href="#">Sub-item 1</a>
+                            <a class="dropdown-item" href="#">Sub-item 2</a>
+                            <a class="dropdown-item" href="#">Sub-item 3</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarDropdownMenuLink"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            Społeczeństwo
+                        </a>
+                        <div
+                            class="dropdown-menu"
+                            aria-labelledby="navbarDropdownMenuLink"
+                        >
+                            <a class="dropdown-item" href="#">Sub-item 1</a>
+                            <a class="dropdown-item" href="#">Sub-item 2</a>
+                            <a class="dropdown-item" href="#">Sub-item 3</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div id="app">
+            <header>
+                <div
+                    id="header"
+                    class="col-12 d-flex justify-content-between headerimage w-100 d-flex align-items-center justify-content-center"
+                    style="background-color: #8b0000"
+                >
+                    <a
+                        title="PRESSGLOBAL"
+                        href="https://pressglobal.pl"
+                        class="w-50 h-100 d-flex align-items-center justify-content-center"
+                        >PRESSGLOBAL</a
+                    >
+                    <a
+                        title="MOTORYZACJA"
+                        href="https://pressglobal.pl/motoryzacja"
+                        class="w-50 h-100 d-flex align-items-center justify-content-center"
+                        >MOTORYZACJA</a
+                    >
+                </div>
+            </header>
+            <div class="text-end mt-1 w-100 formcont">
+                <form
+                    id="search"
+                    action="https://pressglobal.pl/wyszukaj/Motoryzacja"
+                    method="post"
+                >
+                    <input
+                        type="hidden"
+                        name="_token"
+                        value="Sx1wRtgcbJLMCR5xjGeev5i2IAqIuwDsKII10Iko"
+                    />
+                    <input type="text" name="serach" value="" />
+                    <input
+                        type="submit"
+                        class="bg-section submit"
+                        value="Szukaj"
+                    />
+                </form>
+            </div>
+            <nav class="navbar navbar-expand-lg navbar-light secnav">
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarNavDropdownn"
+                    aria-controls="navbarNavDropdownn"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdownn">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                id="navbarDropdownMenuLink"
+                                role="button"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                            >
+                                <b>Strona główna</b>
+                            </a>
+                            <div
+                                class="dropdown-menu"
+                                aria-labelledby="navbarDropdownMenuLink"
+                            >
+                                <a class="dropdown-item" href="#">Sub-item 1</a>
+                                <a class="dropdown-item" href="#">Sub-item 2</a>
+                                <a class="dropdown-item" href="#">Sub-item 3</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                id="navbarDropdownMenuLink"
+                                role="button"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                            >
+                                Wiadomości
+                            </a>
+                            <div
+                                class="dropdown-menu"
+                                aria-labelledby="navbarDropdownMenuLink"
+                            >
+                                <a class="dropdown-item" href="#">Sub-item 1</a>
+                                <a class="dropdown-item" href="#">Sub-item 2</a>
+                                <a class="dropdown-item" href="#">Sub-item 3</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                id="navbarDropdownMenuLink"
+                                role="button"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                            >
+                                Porady i eksploatacja
+                            </a>
+                            <div
+                                class="dropdown-menu"
+                                aria-labelledby="navbarDropdownMenuLink"
+                            >
+                                <a class="dropdown-item" href="#">Sub-item 1</a>
+                                <a class="dropdown-item" href="#">Sub-item 2</a>
+                                <a class="dropdown-item" href="#">Sub-item 3</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                id="navbarDropdownMenuLink"
+                                role="button"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                            >
+                                Auto
+                            </a>
+                            <div
+                                class="dropdown-menu"
+                                aria-labelledby="navbarDropdownMenuLink"
+                            >
+                                <a class="dropdown-item" href="#">Sub-item 1</a>
+                                <a class="dropdown-item" href="#">Sub-item 2</a>
+                                <a class="dropdown-item" href="#">Sub-item 3</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                id="navbarDropdownMenuLink"
+                                role="button"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                            >
+                                Motocykle
+                            </a>
+                            <div
+                                class="dropdown-menu"
+                                aria-labelledby="navbarDropdownMenuLink"
+                            >
+                                <a class="dropdown-item" href="#">Sub-item 1</a>
+                                <a class="dropdown-item" href="#">Sub-item 2</a>
+                                <a class="dropdown-item" href="#">Sub-item 3</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                id="navbarDropdownMenuLink"
+                                role="button"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                            >
+                                Sporty motorowe
+                            </a>
+                            <div
+                                class="dropdown-menu"
+                                aria-labelledby="navbarDropdownMenuLink"
+                            >
+                                <a class="dropdown-item" href="#">Sub-item 1</a>
+                                <a class="dropdown-item" href="#">Sub-item 2</a>
+                                <a class="dropdown-item" href="#">Sub-item 3</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="row mb-3 d-flex text-section search-sec" style="">
+                <div class="col-6 d-flex align-items-end search">
+                    <h5>NAJNOWSZE</h5>
+                </div>
+                <div class="col-6 mt-auto" style="text-align: right">
+                    <form
+                        id="search"
+                        action="https://pressglobal.pl/wyszukaj/Motoryzacja"
+                        method="post"
+                    >
+                        <input
+                            type="hidden"
+                            name="_token"
+                            value="Sx1wRtgcbJLMCR5xjGeev5i2IAqIuwDsKII10Iko"
+                        />
+                        <input type="hidden" name="serach" value="" />
+
+                        <input
+                            type="submit"
+                            class="btn-sectiontext text-wrap text-end button"
+                            value="ZOBACZ WSZYSTKO"
+                        />
+                    </form>
+                </div>
+            </div>
+            <hr class="section-hr" />
+            <div class="row">
+                <div class="col-xl-7 col-l-7 col-md-12 col-sm-12 pb-2">
+                    <div
+                        id="carouselExampleCaptions"
+                        class="carousel slide pointer-event"
+                        data-bs-ride="carousel"
+                    >
+                        <div class="carousel-inner">
+                            <div class="carousel-item">
+                                <a
+                                    href="https://pressglobal.pl/Motoryzacja/gm-wraca-do-hybryd-plug-in-w-obliczu-niepowodzenia-planow-dotyczacych-samochodow-elektrycznych"
+                                >
+                                    <img
+                                        src="master.PNG"
+                                        class="carouselphoto"
+                                        alt="..."
+                                    />
+                                    <div class="captionStyle">
+                                        <div class="ellipsis">
+                                            <h5>
+                                                GM wraca do hybryd plug-in w
+                                                obliczu niepowodzenia planów
+                                                dotyczących samochodów
+                                                elektrycznych
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a
+                                    href="https://pressglobal.pl/Motoryzacja/red-bull-racing-wszczyna-niezalezne-sledztwo-w-sprawie-szefa-zespolu-christiana-hornera"
+                                >
+                                    <img
+                                        src="pest.PNG"
+                                        class="carouselphoto"
+                                        alt="..."
+                                    />
+                                    <div class="captionStyle">
+                                        <div class="ellipsis">
+                                            <h5>
+                                                Red Bull Racing wszczyna
+                                                niezależne śledztwo w sprawie
+                                                szefa zespołu, Christiana
+                                                Hornera
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a
+                                    href="https://pressglobal.pl/Motoryzacja/dyrektor-finansowy-porsche-twierdzi-ze-europa-moze-opoznic-wprowadzenie-zakazu-ice"
+                                >
+                                    <img
+                                        src="master.PNG"
+                                        class="carouselphoto"
+                                        alt="..."
+                                    />
+                                    <div class="captionStyle">
+                                        <div class="ellipsis">
+                                            <h5>
+                                                Dyrektor finansowy Porsche
+                                                twierdzi, że Europa może opóźnić
+                                                wprowadzenie zakazu ICE
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="carousel-item active">
+                                <a
+                                    href="https://pressglobal.pl/Motoryzacja/formula-1:-lewis-hamilton-opuszcza-mercedesa-i-dolacza-do-ferrari"
+                                >
+                                    <img
+                                        src="pest.PNG"
+                                        class="carouselphoto"
+                                        alt="..."
+                                    />
+                                    <div class="captionStyle">
+                                        <div class="ellipsis">
+                                            <h5>
+                                                Formuła 1: Lewis Hamilton
+                                                opuszcza Mercedesa i dołącza do
+                                                Ferrari
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <button
+                            class="carousel-control-prev"
+                            type="button"
+                            data-target="#carouselExampleCaptions"
+                            data-slide="prev"
+                        >
+                            <span
+                                class="carousel-control-prev-icon"
+                                aria-hidden="true"
+                            ></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button
+                            class="carousel-control-next"
+                            type="button"
+                            data-target="#carouselExampleCaptions"
+                            data-slide="next"
+                        >
+                            <span
+                                class="carousel-control-next-icon"
+                                aria-hidden="true"
+                            ></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        <ol class="carousel-indicators">
+                            <li
+                                data-target="#carouselExampleCaptions"
+                                data-slide-to="0"
+                                class=""
+                            >
+                                <img
+                                    src="master.PNG"
+                                    class="d-block w-100 img-fluid"
+                                    alt="Slide 1"
+                                />
+                            </li>
+                            <li
+                                data-target="#carouselExampleCaptions"
+                                data-slide-to="1"
+                            >
+                                <img
+                                    src="pest.PNG"
+                                    class="d-block w-100 img-fluid"
+                                    alt="Slide 2"
+                                />
+                            </li>
+                            <li
+                                data-target="#carouselExampleCaptions"
+                                data-slide-to="2"
+                            >
+                                <img
+                                    src="master.PNG"
+                                    class="d-block w-100 img-fluid"
+                                    alt="Slide 3"
+                                />
+                            </li>
+                            <li
+                                data-target="#carouselExampleCaptions"
+                                data-slide-to="3"
+                                class="active"
+                            >
+                                <img
+                                    src="pest.PNG"
+                                    class="d-block w-100 img-fluid"
+                                    alt="Slide 4"
+                                />
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="col-xl-5 col-l-5 col-md-12 col-sm-12 col-12">
+                    <div class="row pb-2">
+                        <div
+                            class="col-xl-5 col-l-5 col-md-5 col-sm-5 col-5 col-12"
+                        >
+                            <a
+                                href="https://pressglobal.pl/Motoryzacja/formula-1:-lewis-hamilton-opuszcza-mercedesa-i-dolacza-do-ferrari"
+                                ><img
+                                    src="pest.PNG"
+                                    class="w-100 section-rightlist"
+                            /></a>
+                        </div>
+                        <div
+                            class="col-xl-7 col-l-7 col-md-7 col-sm-7 col-7 col-12 overflow-hidden rightlisttext"
+                        >
+                            <a
+                                href="https://pressglobal.pl/Motoryzacja/formula-1:-lewis-hamilton-opuszcza-mercedesa-i-dolacza-do-ferrari"
+                                ><b class="text-section"
+                                    >Formuła 1: Lewis Hamilton opuszcza
+                                    Mercedesa i dołącza do Ferrari</b
+                                ></a
+                            >
+                            <p
+                                class="text-dark"
+                                style="font-weight: lighter; font-size: 14px"
+                            >
+                                Najbardziej utytułowany kierowca F1 zakończy
+                                karierę w czerwonych barwach Ferrari. Po dniu
+                                pełnym spekulacji, zespół Lewisa Hamiltona z
+                                Mercedesa...
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div
+                            class="col-xl-5 col-l-5 col-md-5 col-sm-5 col-5 col-12"
+                        >
+                            <a
+                                href="https://pressglobal.pl/Motoryzacja/lewis-hamilton-ma-zamiar-opuscic-mercedesa-na-rzecz-ferrari-w-2025"
+                                ><img
+                                    src="master.PNG"
+                                    class="w-100 section-rightlist"
+                            /></a>
+                        </div>
+                        <div
+                            class="col-xl-7 col-l-7 col-md-7 col-sm-7 col-7 col-12 overflow-hidden rightlisttext"
+                        >
+                            <a
+                                href="https://pressglobal.pl/Motoryzacja/lewis-hamilton-ma-zamiar-opuscic-mercedesa-na-rzecz-ferrari-w-2025"
+                                ><b class="text-section"
+                                    >Pojawiają się pytania, gdy wiele doniesień
+                                    sugeruje, że Lewis Hamilton ma zamiar
+                                    opuścić Mercedesa na rzecz Ferrari w sezonie
+                                    2025</b
+                                ></a
+                            >
+                            <p
+                                class="text-dark"
+                                style="font-weight: lighter; font-size: 14px"
+                            >
+                                Plotki i spekulacje rozwijają się, gdy wiele
+                                brytyjskich źródeł i publikacji związanych z
+                                wyścigami donosi, że siedmiokrotny mistrz
+                                Formuły 1,...
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row pt-2">
+                        <a
+                            href="https://pressglobal.pl/Motoryzacja/elektryczny-nascar-zadebiutuje-podczas-busch-light-clash-4-lutego"
+                            class="text-section"
+                            >• Elektryczny NASCAR zadebiutuje podczas Busch
+                            Light Clash 4 lutego</a
+                        >
+                    </div>
+                    <div class="row pt-2">
+                        <a
+                            href="https://pressglobal.pl/Motoryzacja/przyjrzyj-sie-datsunowi-z-ktorym-prawdopodobnie-jezdzil-batman"
+                            class="text-section"
+                            >• Przyjrzyj się Datsunowi Z, którym prawdopodobnie
+                            jeździł Batman</a
+                        >
+                    </div>
+                    <div class="row pt-2">
+                        <a
+                            href="https://pressglobal.pl/Motoryzacja/czy-popyt-na-volkswagena-id-buzz-przewyzszy-podaz"
+                            class="text-section"
+                            >• Czy popyt na Volkswagena ID Buzz przewyższy
+                            podaż?</a
+                        >
+                    </div>
+                    <div class="row pt-2">
+                        <a
+                            href="https://pressglobal.pl/Motoryzacja/usps-zgadza-sie-na-zakup-szesciu-elektrycznych-samochodow-dostawczych-canoo-ldv"
+                            class="text-section"
+                            >• USPS zgadza się na zakup sześciu elektrycznych
+                            samochodów dostawczych Canoo LDV, które zostaną
+                            dostarczone do kwietnia</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-section border-top border-dark mt-5 white-text footer">
+            <div class="container pb-5 pt-5 fontSize">
+                <div class="row">
+                    <div class="col-12 col-md-4 mb-3 mb-md-0" align="center">
+                        <a href="#" class="hov">Redakcja</a>
+                        |
+                        <a href="#" class="hov">Regulamin</a>
+                        |
+                        <a href="#" class="hov">O portalu</a>
+                        |
+                        <a href="#" class="hov">Zgłos naruszenie</a>
+                        |
+                        <a href="#" class="hov">Wydawca</a>
+                        |
+                    </div>
+                    <div class="col-12 col-md-4 mb-3 mb-md-0" align="center">
+                        <b>Kontakt</b><br />
+                        <a href="mailto:redakcja@pressglobal.pl" class="hov"
+                            >redakcja@pressglobal.pl</a
+                        ><br />
+                        <a href="mailto:kontakt@pressglobal.pl" class="hov"
+                            >kontakt@pressglobal.pl</a
+                        ><br />
+                    </div>
+                    <div class="col-12 col-md-4" align="center">
+                        Developed by
+                        <a href="https://fundacjaglosmlodych.org/" class="hov"
+                            ><u
+                                >Fundacja na Rzecz Promocji i Rozwoju „Głos
+                                Młodych”</u
+                            ></a
+                        >
+                        and Marcin Larek ⓒ 2022
+                        <a href="https://pressglobal.pl" class="hov">
+                            <b>
+                                <u>Pressglobal.pl</u>
+                            </b>
+                        </a>
+                        Wszelkie prawa zastrzeżone.
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+</html>
